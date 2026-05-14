@@ -1,3 +1,6 @@
+// Copyright (c) 2026 PiCapes
+// All rights reserved.
+
 import puppeteer from "@cloudflare/puppeteer";
 
 export default {
@@ -170,7 +173,7 @@ export default {
                     await viewer.loadCape(capeDataUrl);
                 }
 
-                await new Promise(r => setTimeout(r, 500));
+                await new Promise(r => setTimeout(r, 300));
 
                 viewer.render();
 
