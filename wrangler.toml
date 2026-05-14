@@ -1,0 +1,10 @@
+name = "skin-render-worker"
+main = "src/index.js"
+compatibility_date = "2025-05-14"
+compatibility_flags = ["nodejs_compat"]
+
+[browser]
+binding = "MYBROWSER"
+
+[assets]
+directory = "./public"
