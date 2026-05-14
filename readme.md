@@ -42,6 +42,6 @@ curl -X POST <your workers url> ^
 The server will return the rendered image in the response that is a **png file** of the rendered cape.
 
 ---
-_~ by PiCapes - Minecraft Capes for all._
+<i>~ by PiCapes - Minecraft Capes for all.</i>
 
 
