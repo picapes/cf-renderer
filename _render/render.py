@@ -3,6 +3,12 @@ import requests
 
 URL = "http://127.0.0.1:8787" # replace with Cloudflare Worker URL
 
+# example for local: 
+# URL = "http://127.0.0.1:8787"
+
+# example for hosted worker:
+# URL = "https://...workers.dev"
+
 files = {
     "cape": open("cape.png", "rb")
 }

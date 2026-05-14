@@ -1,52 +1,5 @@
 import puppeteer from "@cloudflare/puppeteer";
 
-const bundleUrl = "/skinview3d.bundle.js";
-const HTML = `
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
-<style>
-html,body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    background:transparent;
-}
-
-#final_canvas{
-    width:1024px;
-    height:1024px;
-}
-</style>
-
-<script src="${bundleUrl}"></script>
-
-</head>
-<body>
-
-<canvas id="final_canvas" width="1024" height="1024"></canvas>
-
-<script>
-window.renderReady = false;
-
-function waitLibrary() {
-    if (typeof skinview3d === "undefined") {
-        setTimeout(waitLibrary, 100);
-        return;
-    }
-
-    window.renderReady = true;
-}
-
-waitLibrary();
-</script>
-
-</body>
-</html>
-`;
-
 export default {
     async fetch(request, env) {
 
@@ -55,6 +8,55 @@ export default {
                 status: 405
             });
         }
+
+        // to support both running on hosted worker and local running
+        const workerOrigin = new URL(request.url).origin;
+
+        const HTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+
+        <style>
+        html,body{
+            margin:0;
+            padding:0;
+            overflow:hidden;
+            background:transparent;
+        }
+
+        #final_canvas{
+            width:1024px;
+            height:1024px;
+        }
+        </style>
+
+        <script src="${workerOrigin}/skinview3d.bundle.js"></script>
+
+        </head>
+        <body>
+
+        <canvas id="final_canvas" width="1024" height="1024"></canvas>
+
+        <script>
+        window.renderReady = false;
+
+        function waitLibrary() {
+            if (typeof skinview3d === "undefined") {
+                setTimeout(waitLibrary, 100);
+                return;
+            }
+
+            window.renderReady = true;
+        }
+
+        waitLibrary();
+        </script>
+
+        </body>
+        </html>
+        `;
 
         const form = await request.formData();
 
