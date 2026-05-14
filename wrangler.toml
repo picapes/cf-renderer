@@ -1,4 +1,4 @@
-name = "skin-render-worker"
+name = "picapes-cape-renderer"
 main = "src/index.js"
 compatibility_date = "2025-05-14"
 compatibility_flags = ["nodejs_compat"]
